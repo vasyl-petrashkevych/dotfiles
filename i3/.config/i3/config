@@ -48,6 +48,8 @@ exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
 exec --no-startup-id feh --bg-scale ~/.config/backgrounds/shaded_landscape.png
 exec --no-startup-id  ~/.config/scripts/screen_layout.sh
 
+exec_always "setxkbmap -model pc104 -layout us,ua -variant ,, -option grp:win_space_toggle"
+
 # start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+space exec --no-startup-id rofi -show combi
