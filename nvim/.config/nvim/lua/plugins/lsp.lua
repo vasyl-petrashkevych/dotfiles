@@ -56,7 +56,7 @@ return {
 					},
 				},
 			},
-			tsserver = {},
+			ts_ls = {},
 			cssls = {},
 			html = {},
 			stylelint_lsp = {
