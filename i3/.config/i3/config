@@ -15,9 +15,7 @@ default_floating_border normal
 hide_edge_borders none
 
 # change borders
-bindsym $mod+u border none
-bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
+bindsym Ctrl+Shift+e exec flameshot gui
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -40,13 +38,19 @@ bindsym $mod+q kill
 ################################################################################################
 
 exec --no-startup-id volumeicon
+exec --no-startup-id blueberry-tray
+exec --no-startup-id telegram-desctop
+exec --no-startup-id slack
+
 bindsym $mod+Ctrl+m exec $terminal -e 'alsamixer'
 
 # kill any hanging polybar processes
-exec_always killall polybar
+exec_always killall polybar 
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
+
 exec --no-startup-id feh --bg-scale ~/.config/backgrounds/shaded_landscape.png
 exec --no-startup-id  ~/.config/scripts/screen_layout.sh
+
 
 exec_always "setxkbmap -model pc104 -layout us,ua -variant ,, -option grp:win_space_toggle"
 
