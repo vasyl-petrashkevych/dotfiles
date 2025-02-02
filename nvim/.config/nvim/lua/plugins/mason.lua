@@ -14,7 +14,6 @@ return {
 					"cssls",
 					"intelephense",
 					"stylelint_lsp",
-					"tsserver",
 					"jsonls",
 					"graphql",
 					"typos_lsp",
