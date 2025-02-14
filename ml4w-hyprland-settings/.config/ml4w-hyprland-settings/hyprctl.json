@@ -1,0 +1,14 @@
+[
+    {
+        "key": "decoration:blur:ignore_opacity",
+        "value": true
+    },
+    {
+        "key": "decoration:blur:xray",
+        "value": true
+    },
+    {
+        "key": "decoration:blur:popups",
+        "value": true
+    }
+]
