@@ -33,10 +33,6 @@
 			"default": ""
 		}
 	},
-	"tray": {
-		"icon-size": 21,
-		"spacing": 10
-	},
 	"custom/music": {
 		"format": "    {}",
 		"escape": true,
@@ -45,12 +41,6 @@
 		"exec": "playerctl metadata --format='{{ title }}'",
 		"on-click": "playerctl play-pause",
 		"max-length": 50
-	},
-	"clock": {
-		//"timezone": "Asia/Tehran",
-		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-		"format-alt": " {:%d/%m/%Y}",
-		"format": " {:%H:%M}"
 	},
 	"backlight": {
 		"device": "nvidia_0",
@@ -87,19 +77,6 @@
 			""
 		]
 	},
-	// "pulseaudio": {
-	// 	// "scroll-step": 1, // %, can be a float
-	// 	"format": "{icon} {volume}%",
-	// 	"format-muted": "",
-	// 	"format-icons": {
-	// 		"default": [
-	// 			"",
-	// 			"",
-	// 			" "
-	// 		]
-	// 	},
-	// 	"on-click": "pavucontrol"
-	// },
 	"custom/lock": {
 		"tooltip": false,
 		"on-click": "hyprlock &",
