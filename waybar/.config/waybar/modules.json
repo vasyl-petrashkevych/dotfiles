@@ -4,8 +4,6 @@
 // | |  | | (_) | (_| | |_| | |  __/\__ \
 // |_|  |_|\___/ \__,_|\__,_|_|\___||___/
 //
-//
-// by Stephan Raabe (2023)
 // -----------------------------------------------------
 //
 {
@@ -119,7 +117,12 @@
     "on-click": "alacritty -e htop"
   },
   "hyprland/language": {
-    "format": "| {short}"
+    "format": " {}",
+    "format-en": "en",
+    "format-ua": "ua",
+    "interval": 1,
+    "keyboard-name": "gaming-keyboard",
+    "on-click": "hyprctl switchxkblayout gaming-keyboard next"
   },
   // Group Hardware
   "group/hardware": {
@@ -223,5 +226,14 @@
       "deactivated": ""
     },
     "on-click-right": "hyprlock"
+  },
+  "custom/music": {
+    "format": "    {}",
+    "escape": true,
+    "interval": 5,
+    "tooltip": false,
+    "exec": "playerctl metadata --format='{{ title }}'",
+    "on-click": "playerctl play-pause",
+    "max-length": 50
   }
 }

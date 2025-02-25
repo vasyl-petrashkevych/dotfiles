@@ -5,6 +5,8 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+		local format_on_save = true -- Toggle this variable to enable/disable formatting on save
+
 		local function on_attach(client, bufnr)
 			local map = function(keys, func, desc)
 				vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
@@ -22,7 +24,6 @@ return {
 			map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 			map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
 
-			-- Document Highlighting
 			if client.server_capabilities.documentHighlightProvider then
 				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 					buffer = bufnr,
@@ -35,8 +36,7 @@ return {
 				})
 			end
 
-			-- Format on Save
-			if client.server_capabilities.documentFormattingProvider then
+			if format_on_save and client.server_capabilities.documentFormattingProvider then
 				vim.api.nvim_create_autocmd("BufWritePre", {
 					buffer = bufnr,
 					callback = function()
@@ -46,7 +46,6 @@ return {
 			end
 		end
 
-		-- Setup Language Servers
 		local servers = {
 			lua_ls = {
 				settings = {
@@ -82,6 +81,7 @@ return {
 					"--completion-style=detailed",
 					"--function-arg-placeholders",
 					"--fallback-style=llvm",
+					"--std=c11",
 				},
 				init_options = {
 					usePlaceholders = true,
@@ -89,9 +89,12 @@ return {
 					clangdFileStatus = true,
 				},
 				root_dir = function(fname)
-					return require("lspconfig.util").root_pattern("Makefile", "configure.ac", "compile_commands.json")(
-						fname
-					) or require("lspconfig.util").find_git_ancestor(fname)
+					return require("lspconfig.util").root_pattern(
+						"Makefile",
+						"configure.ac",
+						"compile_commands.json",
+						"CMakeLists.txt"
+					)(fname) or require("lspconfig.util").find_git_ancestor(fname)
 				end,
 			},
 			cmake = {},
@@ -118,27 +121,12 @@ return {
 			},
 		}
 
-		-- Apply setup for all servers
 		for server, config in pairs(servers) do
 			config.capabilities = capabilities
 			config.on_attach = config.on_attach or on_attach
-			lspconfig[server].setup(config)
+			pcall(function()
+				lspconfig[server].setup(config)
+			end)
 		end
-
-		-- Linters & Diagnostics
-		lspconfig.diagnosticls.setup({
-			filetypes = { "php" },
-			init_options = {
-				linters = {
-					phpcs = {
-						command = "vendor/bin/phpcs",
-						debounce = 300,
-						args = { "--report=emacs", "-s", "-" },
-						sourceName = "phpcs",
-						requiredFiles = { "vendor/bin/phpcs" },
-					},
-				},
-			},
-		})
 	end,
 }

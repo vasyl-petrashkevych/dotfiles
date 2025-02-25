@@ -33,15 +33,6 @@
 			"default": ""
 		}
 	},
-	"custom/music": {
-		"format": "    {}",
-		"escape": true,
-		"interval": 5,
-		"tooltip": false,
-		"exec": "playerctl metadata --format='{{ title }}'",
-		"on-click": "playerctl play-pause",
-		"max-length": 50
-	},
 	"backlight": {
 		"device": "nvidia_0",
 		"format": "{icon}",
@@ -77,22 +68,4 @@
 			""
 		]
 	},
-	"custom/lock": {
-		"tooltip": false,
-		"on-click": "hyprlock &",
-		"format": ""
-	},
-	"custom/power": {
-		"tooltip": false,
-		"on-click": "wlogout &",
-		"format": "⏻"
-	},
-	"hyprland/language": {
-		"format": " {}",
-		"format-en": "en",
-		"format-fa": "fa",
-		"interval": 1,
-		"keyboard-name": "gaming-keyboard",
-		"on-click": "hyprctl switchxkblayout gaming-keyboard next"
-	}
 }

@@ -2,12 +2,12 @@ return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
 	dependencies = {
-		"L3MON4D3/LuaSnip",
-		"saadparwaiz1/cmp_luasnip",
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-path",
-		"rafamadriz/friendly-snippets",
-		"onsails/lspkind.nvim",
+		{ "L3MON4D3/LuaSnip", lazy = true },
+		{ "saadparwaiz1/cmp_luasnip", lazy = true },
+		{ "hrsh7th/cmp-nvim-lsp", lazy = true },
+		{ "hrsh7th/cmp-path", lazy = true },
+		{ "rafamadriz/friendly-snippets", lazy = true },
+		{ "onsails/lspkind.nvim", lazy = true },
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -57,14 +57,14 @@ return {
 			},
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp", priority = 1000 },
-				{ name = "luasnip", priority = 900 },
+				{ name = "luasnip", priority = 950 },
+				{ name = "path", priority = 900 },
+				{ name = "buffer", priority = 850 },
 				{ name = "nvim_lua", priority = 800 },
-				{ name = "path", priority = 700 },
-				{ name = "buffer", priority = 600 },
+				{ name = "treesitter", priority = 750 },
 				{ name = "emoji", priority = 500 },
-				{ name = "treesitter", priority = 400 },
-				{ name = "crates", priority = 300 },
-				{ name = "tmux", priority = 200 },
+				{ name = "crates", priority = 400 },
+				{ name = "tmux", priority = 300 },
 			}),
 			formatting = {
 				format = lspkind.cmp_format({
