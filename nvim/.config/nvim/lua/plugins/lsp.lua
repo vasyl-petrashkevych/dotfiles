@@ -4,7 +4,6 @@ return {
 		local lspconfig = require("lspconfig")
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
 		local format_on_save = true -- Toggle this variable to enable/disable formatting on save
 
 		local function on_attach(client, bufnr)
@@ -12,17 +11,21 @@ return {
 				vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
 			end
 
-			map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
-			map("gr", require("telescope.builtin").lsp_references, "Goto References")
-			map("gi", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-			map("go", require("telescope.builtin").lsp_type_definitions, "Type Definition")
-			map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
-			map("<leader>Ps", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
+			map("gD", vim.lsp.buf.declaration, "Go to declaration")
+			map("gd", vim.lsp.buf.definition, "Go to definition")
+			map("gi", vim.lsp.buf.implementation, "Go to implementation")
+			map("<leader>sh", vim.lsp.buf.signature_help, "Show signature help")
+			map("<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
+			map("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
 
-			map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
-			map("sd", vim.lsp.buf.signature_help, "Signature Documentation")
-			map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-			map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
+			map("<leader>wl", function()
+				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+			end, "List workspace folders")
+
+			map("<leader>D", vim.lsp.buf.type_definition, "Go to type definition")
+
+			map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+			map("gr", vim.lsp.buf.references, "Show references")
 
 			if client.server_capabilities.documentHighlightProvider then
 				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -72,17 +75,6 @@ return {
 			dockerls = {},
 			clangd = {
 				filetypes = { "c", "cpp", "h", "hpp" },
-				cmd = {
-					"clangd",
-					"--offset-encoding=utf-16",
-					"--background-index",
-					"--clang-tidy",
-					"--header-insertion=iwyu",
-					"--completion-style=detailed",
-					"--function-arg-placeholders",
-					"--fallback-style=llvm",
-					"--std=c11",
-				},
 				init_options = {
 					usePlaceholders = true,
 					completeUnimported = true,

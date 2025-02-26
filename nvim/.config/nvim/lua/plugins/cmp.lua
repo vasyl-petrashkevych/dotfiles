@@ -61,10 +61,7 @@ return {
 				{ name = "path", priority = 900 },
 				{ name = "buffer", priority = 850 },
 				{ name = "nvim_lua", priority = 800 },
-				{ name = "treesitter", priority = 750 },
 				{ name = "emoji", priority = 500 },
-				{ name = "crates", priority = 400 },
-				{ name = "tmux", priority = 300 },
 			}),
 			formatting = {
 				format = lspkind.cmp_format({
