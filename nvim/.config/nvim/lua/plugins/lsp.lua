@@ -58,9 +58,35 @@ return {
 					},
 				},
 			},
-			ts_ls = {},
+			ts_ls = {
+				filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+				root_dir = require("lspconfig.util").root_pattern(
+					"package.json",
+					"tsconfig.json",
+					"jsconfig.json",
+					".git"
+				),
+				settings = {
+					completions = { completeFunctionCalls = true },
+				},
+			},
+			emmet_ls = {
+				filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact", "ejs" },
+				init_options = {
+					html = {
+						options = {
+							["bem.enabled"] = true, -- Enable BEM support
+						},
+					},
+				},
+			},
 			cssls = {},
-			html = {},
+			html = {
+				filetypes = { "html", "ejs" },
+				init_options = {
+					provideFormatter = true,
+				},
+			},
 			stylelint_lsp = {
 				filetypes = { "css", "scss", "less" },
 				settings = { stylelintplus = { autoFixOnSave = true, autoFixOnFormat = true } },

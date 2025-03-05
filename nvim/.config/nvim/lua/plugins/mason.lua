@@ -20,6 +20,7 @@ return {
 					"docker_compose_language_service",
 					"dockerls",
 					"bashls",
+					"emmet_ls",
 				},
 				automatic_installation = true,
 			},
