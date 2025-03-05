@@ -3,7 +3,7 @@
 ### Mangaro
 
 ```bash
-sudo pacman -S alacritty ttf-meslo-nerd flameshot polybar rofi php php-apache php-cgi php-fpm php-gd  php-embed php-intl php-redis php-snmp composer
+sudo  pacman -S gtk-chtheme alacritty ttf-meslo-nerd flameshot polybar rofi php php-apache php-cgi php-fpm php-gd  php-embed php-intl php-redis php-snmp composer
 blueberry pavucontrol zscroll rofi-power-menu
 ```
 
@@ -16,8 +16,8 @@ pamac install lua-language-server fish lazygit docker docker-compose bat clang p
 ## For .zshrc or .bashrc
 
 ```bash
-alias nv="nvim"
-alias nvo="nvim ."
+alias n="nvim"
+alias no="nvim ."
 alias nvc="nvim ~/.config/nvim/init.lua"
 ```
 
