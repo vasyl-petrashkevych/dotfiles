@@ -24,7 +24,7 @@ alias nvc="nvim ~/.config/nvim/init.lua"
 ## Dependencies
 
 ```bash
-npm install -g vscode-langservers-extracted typescript typescript-language-server intelephense diagnostic-languageserver stylelint-lsp
+npm install -g emmet_ls vscode-langservers-extracted typescript typescript-language-server intelephense diagnostic-languageserver stylelint-lsp
 ```
 
 ## PHP Dependencies

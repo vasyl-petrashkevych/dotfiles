@@ -1,11 +1,3 @@
--- Recognize .ejs files as EJS
-vim.filetype.add({ extension = { ejs = "ejs" } })
-
--- Register Treesitter support for EJS
-vim.treesitter.language.register("html", "ejs")
-vim.treesitter.language.register("javascript", "ejs")
-vim.treesitter.language.register("embedded_template", "ejs")
-
 return {
 	"neovim/nvim-lspconfig",
 	config = function()
@@ -79,7 +71,15 @@ return {
 				},
 			},
 			emmet_ls = {
-				filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact", "ejs" },
+				filetypes = {
+					"html",
+					"css",
+					"scss",
+					"javascriptreact",
+					"typescriptreact",
+					"markdown",
+					"ejs",
+				},
 				init_options = {
 					html = {
 						options = {
