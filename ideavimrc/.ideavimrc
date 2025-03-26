@@ -1,0 +1,89 @@
+"""""""""""""""""""""""""""""""""""""""""""
+" Basics
+"""""""""""""""""""""""""""""""""""""""""""
+set showmatch
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set history=3000000
+set commentary
+set number relativenumber
+let mapleader = " "
+set clipboard^=unnamed,u$LRUnnamedplus
+
+"""""""""""""""""""""""""""""""""""""""""""
+" IDE Shortcuts
+""""""""""""""""""""""""""""""""""""""""""
+sethandler <C-A> a:ide
+sethandler <C-C> a:ide
+sethandler <C-S> a:ide
+sethandler <C-V> a:ide
+sethandler <C-D> a:ide
+
+nnoremap <C-e> :action RenameElement<CR>
+"""""""""""""""""""""""""""""""""""""""""""
+" Window Navigation
+"""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>tn :action NextTab<CR>
+nmap <leader>tp :action PreviousTab<CR>
+nnoremap <leader>j :action GotoNextError<CR>
+nnoremap <leader>k :action GotoPreviousError<CR>
+nmap <leader>wq :action CloseEditor<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>E :NERDTreeFind<CR>
+nnoremap <leader>gg :action CheckinProject<CR>
+nnoremap <leader>ot :action ActivateTerminalToolWindow<CR>
+nnoremap <leader>xx :action ActivateProblemsViewToolWindow<CR>
+noremap <leader>fs :action FileStructurePopup<CR>
+noremap <C-q> :action HideActiveWindow<CR>
+noremap <leader>qq :action HideAllWindows<CR>
+noremap <leader>pp :action $LRU<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""
+" File Navigation and Actions
+"""""""""""""""""""""""""""""""""""""""""""
+noremap <leader>n :action GotoNextError<CR>
+noremap <leader>p :action GotoPreviousError<CR>
+noremap <leader>cf :action ReformatCode<CR>
+noremap <leader>sm :action ShowPopupMenu<CR>
+noremap <leader>ca :action ShowIntentionActions<CR>
+noremap <leader>se :action ShowErrorDescription<CR>
+nnoremap <leader>fu :action FindUsages<CR>
+nnoremap <leader>su :action ShowUsages<CR>
+nnoremap <leader>rn :action RenameElement <CR>
+"""""""""""""""""""""""""""""""""""""""""""
+" Base Actions
+"""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>cv :action ChangeView<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""
+" Search Actions
+"""""""""""""""""""""""""""""""""""""""""""
+noremap <leader>ss :action FindInPath<CR>
+noremap <leader>fs :action SearchEverywhere<CR>
+noremap <leader>ff :action GotoFile<CR>
+noremap <leader>bb :action RecentFiles<CR>
+noremap <leader>fa :action GotoAction<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""
+" Debug Actions
+"""""""""""""""""""""""""""""""""""""""""""
+noremap <leader>bp :action ToggleLineBreakpoint<CR>
+noremap <leader>dd :action Debug<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""""""""""""""""""
+set NERDTree
+let g:NERDTreeMapActivateNode='w'
+let g:NERDTreeMapJumpParent='h'
+let g:NERDTreeMapOpenSplit='S'
+let g:NERDTreeMapOpenVSplit='s'
+
+set highlightedyank
+set commentary
+set surround
+set multiple-cursors
+set which-key
+set notimeout
