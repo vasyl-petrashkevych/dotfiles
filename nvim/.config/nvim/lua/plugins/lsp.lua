@@ -1,174 +1,192 @@
 return {
 	"neovim/nvim-lspconfig",
+	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-		"nvimtools/none-ls.nvim", -- Required for nvim-eslint
-		"MunifTanjim/eslint.nvim", -- nvim-eslint plugin
+		"hrsh7th/cmp-nvim-lsp",
+		{ "antosha417/nvim-lsp-file-operations", config = true },
+		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		local lsp_ok, lspconfig = pcall(require, "lspconfig")
-		if not lsp_ok then
-			return
+		local lspconfig = require("lspconfig")
+		local mason_lspconfig = require("mason-lspconfig")
+		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+		-- Icons for diagnostics
+		local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+		for type, icon in pairs(signs) do
+			local hl = "DiagnosticSign" .. type
+			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 		end
 
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+		-- Global diagnostics settings
+		vim.diagnostic.config({
+			virtual_text = {
+				prefix = "●",
+				spacing = 4,
+			},
+			signs = true,
+			underline = true,
+			update_in_insert = false,
+			severity_sort = true,
+			float = {
+				source = true,
+				border = "round",
+			},
+		})
 
-		local format_on_save = true -- Toggle this variable to enable/disable formatting on save
+		local on_attach = function(_, bufnr)
+			local opts = { buffer = bufnr, silent = true }
+			local keymap = vim.keymap
 
-		local function on_attach(client, bufnr)
-			local map = function(keys, func, desc)
-				vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
-			end
-
-			map("gD", vim.lsp.buf.declaration, "Go to declaration")
-			map("gd", vim.lsp.buf.definition, "Go to definition")
-			map("gi", vim.lsp.buf.implementation, "Go to implementation")
-			map("<leader>sh", vim.lsp.buf.signature_help, "Show signature help")
-			map("<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
-			map("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
-			map("<leader>wl", function()
-				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-			end, "List workspace folders")
-			map("<leader>D", vim.lsp.buf.type_definition, "Go to type definition")
-			map("<leader>ca", vim.lsp.buf.code_action, "Code action")
-			map("gr", vim.lsp.buf.references, "Show references")
-
-			if client.server_capabilities.documentHighlightProvider then
-				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-					buffer = bufnr,
-					callback = vim.lsp.buf.document_highlight,
-				})
-				vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-					buffer = bufnr,
-					callback = vim.lsp.buf.clear_references,
-				})
-			end
-
-			if format_on_save and client.server_capabilities.documentFormattingProvider then
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					buffer = bufnr,
-					callback = function()
-						vim.lsp.buf.format({ async = true })
-					end,
-				})
-			end
+			opts.desc = "Show LSP references"
+			keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+			opts.desc = "Go to declaration"
+			keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+			opts.desc = "Show LSP definitions"
+			keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+			opts.desc = "Show LSP implementations"
+			keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+			opts.desc = "Show LSP type definitions"
+			keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+			opts.desc = "See available code actions"
+			keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+			opts.desc = "Smart rename"
+			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+			opts.desc = "Show buffer diagnostics"
+			keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+			opts.desc = "Show line diagnostics"
+			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+			opts.desc = "Go to previous diagnostic"
+			keymap.set("n", "[d", function()
+				vim.diagnostic.jump({ count = -1, float = true })
+			end, opts)
+			opts.desc = "Go to next diagnostic"
+			keymap.set("n", "]d", function()
+				vim.diagnostic.jump({ count = -1, float = true })
+			end, opts)
+			opts.desc = "Show hover documentation"
+			keymap.set("n", "K", vim.lsp.buf.hover, opts)
+			opts.desc = "Restart LSP"
+			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 		end
 
-		-- Load nvim-eslint if available
-		local eslint_ok, eslint = pcall(require, "eslint")
-		if eslint_ok then
-			eslint.setup({
-				bin = "eslint_d", -- Uses `eslint_d` for faster execution
-				code_actions = { enable = true },
-				diagnostics = { enable = true },
-				disable_if_no_config = true,
-			})
-		end
+		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		-- LSP Server Configurations
-		local servers = {
-			lua_ls = {
-				settings = {
-					Lua = {
-						diagnostics = { globals = { "vim" } },
-						workspace = { library = vim.api.nvim_get_runtime_file("", true), checkThirdParty = false },
-					},
-				},
-			},
-			ts_ls = {
-				filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-				root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-				settings = { completions = { completeFunctionCalls = true } },
-			},
-			eslint = {
-				on_attach = function(client, bufnr)
-					on_attach(client, bufnr)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						callback = function()
-							if eslint_ok then
-								eslint.fix() -- Runs nvim-eslint fix on save
-							end
-							vim.lsp.buf.format({ async = true })
-						end,
-					})
-				end,
-			},
-			emmet_ls = {
-				filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact", "markdown", "ejs" },
-				init_options = { html = { options = { ["bem.enabled"] = true } } },
-			},
-			cssls = {},
-			html = {
-				filetypes = { "html", "ejs" },
-				init_options = { provideFormatter = true },
-			},
-			stylelint_lsp = {
-				filetypes = { "css", "scss", "less" },
-				settings = { stylelintplus = { autoFixOnSave = true, autoFixOnFormat = true } },
-			},
-			docker_compose_language_service = {},
-			dockerls = {},
-			clangd = {
-				filetypes = { "c", "cpp", "h", "hpp" },
-				init_options = {
-					usePlaceholders = true,
-					completeUnimported = true,
-					clangdFileStatus = true,
-				},
-				root_dir = function(fname)
-					return lspconfig.util.root_pattern(
-						"Makefile",
-						"configure.ac",
-						"compile_commands.json",
-						"CMakeLists.txt"
-					)(fname) or lspconfig.util.find_git_ancestor(fname)
-				end,
-			},
-			cmake = {},
-			bashls = {},
-			jsonls = {
-				cmd = { "vscode-json-language-server", "--stdio" },
-				settings = {
-					json = {
-						schemas = {
-							{ fileMatch = { "package.json" }, url = "https://json.schemastore.org/package.json" },
+		mason_lspconfig.setup_handlers({
+			function(server_name)
+				lspconfig[server_name].setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+				})
+			end,
+
+			-- Special configs
+			["lua_ls"] = function()
+				lspconfig.lua_ls.setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+					settings = {
+						Lua = {
+							diagnostics = { globals = { "vim" } },
+							completion = { callSnippet = "Replace" },
 						},
 					},
-				},
-			},
-			intelephense = {
-				cmd = { "intelephense", "--stdio" },
-				filetypes = { "php" },
-				settings = {
-					intelephense = {
-						diagnostics = { enable = true },
-						files = { maxSize = 5000000 },
+				})
+			end,
+
+			["emmet_ls"] = function()
+				lspconfig.emmet_ls.setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+					filetypes = {
+						"html",
+						"typescriptreact",
+						"javascriptreact",
+						"css",
+						"sass",
+						"scss",
+						"less",
+						"svelte",
 					},
-				},
-			},
-		}
+				})
+			end,
 
-		-- Setup Mason for easy LSP installations
-		local mason_ok, mason = pcall(require, "mason")
-		local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
+			["graphql"] = function()
+				lspconfig.graphql.setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+				})
+			end,
 
-		if mason_ok and mason_lsp_ok then
-			mason.setup()
-			mason_lsp.setup({
-				ensure_installed = vim.tbl_keys(servers), -- Auto-install LSPs
-			})
-		end
+			["ts_ls"] = function()
+				lspconfig.ts_ls.setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+				})
+			end,
 
-		-- Initialize LSP servers
-		for server, config in pairs(servers) do
-			config.capabilities = capabilities
-			config.on_attach = config.on_attach or on_attach
-			pcall(function()
-				lspconfig[server].setup(config)
-			end)
-		end
+			["clangd"] = function()
+				lspconfig.clangd.setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+					cmd = {
+						"clangd",
+						"--offset-encoding=utf-16",
+						"--background-index",
+						"--clang-tidy",
+						"--header-insertion=iwyu",
+						"--completion-style=detailed",
+						"--function-arg-placeholders",
+						"--fallback-style=llvm",
+					},
+				})
+			end,
+
+			["bashls"] = function()
+				lspconfig.bashls.setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+				})
+			end,
+
+			["cmake"] = function()
+				lspconfig.cmake.setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+				})
+			end,
+
+			["marksman"] = function() -- Markdown
+				lspconfig.marksman.setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+				})
+			end,
+
+			["dockerls"] = function()
+				lspconfig.dockerls.setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+					filetypes = { "Dockerfile" },
+				})
+			end,
+
+			["docker_compose_language_service"] = function()
+				lspconfig.docker_compose_language_service.setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+					filetypes = { "yaml.docker-compose" },
+				})
+			end,
+		})
+
+		-- Optional: Filetype detection for docker-compose
+		vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+			pattern = { "docker-compose*.yml", "docker-compose*.yaml" },
+			callback = function()
+				vim.bo.filetype = "yaml.docker-compose"
+			end,
+		})
 	end,
 }

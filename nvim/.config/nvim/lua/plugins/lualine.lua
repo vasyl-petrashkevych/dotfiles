@@ -1,72 +1,39 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = {
-		"meuter/lualine-so-fancy.nvim",
-	},
-	enabled = true,
-	lazy = false,
-	event = { "BufReadPost", "BufNewFile", "VeryLazy" },
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
-		-- local icons = require("config.icons")
-		require("lualine").setup({
+		local lualine = require("lualine")
+		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
+
+		-- configure lualine with modified theme
+		lualine.setup({
 			options = {
 				theme = "auto",
-				-- theme = "catppuccin",
-				globalstatus = true,
-				icons_enabled = true,
-				-- component_separators = { left = "│", right = "│" },
-				component_separators = { left = "|", right = "|" },
-				section_separators = { left = "", right = "" },
-				disabled_filetypes = {
-					statusline = {
-						"alfa-nvim",
-						"help",
-						"neo-tree",
-						"Trouble",
-						"spectre_panel",
-						"toggleterm",
-					},
-					winbar = {},
-				},
 			},
-			sections = {
-				lualine_a = { "mode", "progress" },
-				lualine_b = {},
-				lualine_c = {
-					{
-						"filename",
-						path = 1, -- 2 for full path
-						symbols = {
-							modified = "  ",
-							readonly = "  ",
-							unnamed = "  ",
-						},
-					},
-					{
-						"fancy_diagnostics",
-						sources = { "nvim_lsp" },
-						symbols = { error = " ", warn = " ", info = " " },
-					},
-					{ "fancy_searchcount" },
+			disabled_filetypes = {
+				statusline = {
+					"alfa-nvim",
+					"help",
+					"neo-tree",
+					"Trouble",
+					"spectre_panel",
+					"toggleterm",
 				},
-				lualine_x = {
-					"fancy_lsp_servers",
-					"fancy_diff",
-					"fancy_branch",
-				},
-				lualine_y = {},
-				lualine_z = {},
+				winbar = {},
 			},
-			inactive_sections = {
-				lualine_a = {},
-				lualine_b = {},
-				lualine_c = { "filename" },
-				-- lualine_x = { "location" },
-				lualine_y = {},
-				lualine_z = {},
-			},
-			tabline = {},
 			extensions = { "neo-tree", "lazy" },
+			sections = {
+				lualine_x = {
+					{
+						lazy_status.updates,
+						cond = lazy_status.has_updates,
+						color = { fg = "#ff9e64" },
+					},
+					{ "encoding" },
+					{ "fileformat" },
+					{ "filetype" },
+				},
+			},
 		})
 	end,
 }

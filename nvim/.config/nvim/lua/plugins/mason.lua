@@ -1,35 +1,55 @@
 return {
 	"williamboman/mason.nvim",
-	cmd = "Mason", -- Load only when Mason is needed
 	dependencies = {
-		{
-			"williamboman/mason-lspconfig.nvim",
-			event = "BufReadPre", -- Load before opening a file
-		},
+		"williamboman/mason-lspconfig.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
+		-- import mason
 		local mason = require("mason")
-		local mason_conf = require("mason-lspconfig")
-		mason.setup()
-		mason_conf.setup({
+
+		-- import mason-lspconfig
+		local mason_lspconfig = require("mason-lspconfig")
+
+		local mason_tool_installer = require("mason-tool-installer")
+
+		-- enable mason and configure icons
+		mason.setup({
+			ui = {
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
+				},
+			},
+		})
+
+		mason_lspconfig.setup({
+			automatic_installation = true,
 			ensure_installed = {
-				"lua_ls",
-				"clangd",
-				"cmake",
+				"ts_ls",
 				"html",
 				"cssls",
-				"intelephense",
-				"stylelint_lsp",
-				"jsonls",
+				"lua_ls",
 				"graphql",
-				"typos_lsp",
+				"emmet_ls",
+				"clangd",
+				"cmake",
 				"docker_compose_language_service",
 				"dockerls",
 				"bashls",
-				"emmet_ls",
+				"marksman",
 			},
-			automatic_installation = true,
+		})
+
+		mason_tool_installer.setup({
+			ensure_installed = {
+				"prettier", -- prettier formatter
+				"stylua", -- lua formatter
+				"isort", -- python formatter
+				"black", -- python formatter
+				"eslint_d",
+			},
 		})
 	end,
-	opts = {}, -- Mason will use default setup
 }

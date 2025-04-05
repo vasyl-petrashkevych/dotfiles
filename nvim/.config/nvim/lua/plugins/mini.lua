@@ -6,6 +6,8 @@ return {
 			require("mini.pairs").setup(opts)
 		end,
 	},
+	{ "echasnovski/mini.animate", version = false },
+	{ "norcalli/nvim-colorizer.lua" },
 	{
 		"echasnovski/mini.comment",
 		version = "*",
@@ -49,20 +51,6 @@ return {
 					},
 				},
 			})
-		end,
-	},
-	-- {
-	-- 	"ellisonleao/gruvbox.nvim",
-	-- 	config = function()
-	-- 		vim.cmd([[colorscheme gruvbox]])
-	-- 	end,
-	-- },
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		config = function()
-			vim.cmd([[colorscheme catppuccin]])
 		end,
 	},
 }

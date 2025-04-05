@@ -1,54 +1,61 @@
 vim.cmd("autocmd!")
+local opt = vim.opt
 -- Encoding
 vim.scriptencoding = "utf-8"
-vim.opt.encoding = "utf-8"
-vim.opt.fileencoding = "utf-8"
-vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
+opt.clipboard = "unnamedplus" -- Sync with system clipboard
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+opt.termguicolors = true
 
 -- Spelling
-vim.opt.spelllang = "en_us"
-vim.opt.spell = true
+opt.spelllang = "en_us"
+opt.spell = true
 
 vim.g.loaded_netrw = 1 -- disable netrw
 vim.g.loaded_netrwPlugin = 1 --  disable netrw
 --
-vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
-vim.opt.mouse = "a" -- allow the mouse to be used in neovim
-vim.opt.incsearch = true -- make search act like search in modern browsers
-vim.wo.number = true -- Show Line numbers
-vim.opt.termguicolors = true -- set term gui colors (most terminals support this)
-vim.opt.timeoutlen = 1000 -- time to wait for a mapped sequence to complete (in milliseconds)
-vim.opt.undofile = true -- enable persistent undo
-vim.opt.updatetime = 100 -- faster completion (4000ms default)
-vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-vim.opt.expandtab = false -- convert tabs to spaces-
-vim.wo.relativenumber = true
-vim.opt.backupskip = { "/tmp/*", "/private/tmp/*" }
-vim.opt.smartindent = true -- make indenting smarter again
-vim.opt.inccommand = "split"
-vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
-vim.opt.smarttab = true
-vim.opt.breakindent = true
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-vim.opt.wrap = false -- No Wrap lines
-vim.opt.backspace = { "start", "eol", "indent" }
-vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
-vim.opt.wildignore:append({ "*/node_modules/*, */vendor/*" })
-vim.opt.signcolumn = "yes"
-vim.opt.listchars = { tab = "—-—", space = "·" }
-vim.opt.list = true
+opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
+opt.mouse = "a" -- allow the mouse to be used in neovim
+opt.incsearch = true -- make search act like search in modern browsers
+opt.number = true -- Show Line numbers
+opt.termguicolors = true -- set term gui colors (most terminals support this)
+opt.timeoutlen = 1000 -- time to wait for a mapped sequence to complete (in milliseconds)
+opt.undofile = true -- enable persistent undo
+opt.updatetime = 100 -- faster completion (4000ms default)
+opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+opt.expandtab = false -- convert tabs to spaces-
+opt.relativenumber = true
+opt.backupskip = { "/tmp/*", "/private/tmp/*" }
+opt.smartindent = true -- make indenting smarter again
+opt.inccommand = "split"
+opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
+opt.smarttab = true
+opt.breakindent = true
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.wrap = false -- No Wrap lines
+opt.backspace = { "start", "eol", "indent" }
+opt.path:append({ "**" }) -- Finding files - Search down into subfolders
+opt.wildignore:append({ "*/node_modules/*, */vendor/*" })
+opt.signcolumn = "yes"
+opt.listchars = { tab = "—-—", space = "·" }
+opt.list = true
 
 -- Add asterisks in block comments
-vim.opt.formatoptions:append({ "r" })
+opt.formatoptions:append({ "r" })
 
 -- Highlights
-vim.opt.cursorline = true
-vim.opt.termguicolors = true
-vim.opt.winblend = 0
-vim.opt.wildoptions = "pum"
-vim.opt.pumblend = 5
-vim.opt.background = "dark"
+opt.cursorline = true
+opt.termguicolors = true
+opt.winblend = 0
+opt.wildoptions = "pum"
+opt.pumblend = 5
+opt.background = "dark"
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 

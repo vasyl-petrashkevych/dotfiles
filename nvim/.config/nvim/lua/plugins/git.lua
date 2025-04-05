@@ -1,35 +1,17 @@
 return {
 	{
-		"kdheepak/lazygit.nvim",
-		cmd = { "LazyGit" }, -- Load only when LazyGit command is used
-		dependencies = { "nvim-telescope/telescope.nvim" },
-		config = function()
-			require("telescope").load_extension("lazygit")
-		end,
-	},
-
-	{
 		"lewis6991/gitsigns.nvim",
-		event = "BufReadPre", -- Load only when a file is opened
-		dependencies = { "nvim-lua/plenary.nvim" },
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
-			signs = {
-				add = { text = "▎" },
-				change = { text = "▎" },
-				delete = { text = "" },
-				topdelete = { text = "" },
-				changedelete = { text = "▎" },
-				untracked = { text = "▎" },
-			},
-			on_attach = function(buffer)
+			on_attach = function(bufnr)
 				local gs = package.loaded.gitsigns
 				local function map(mode, l, r, desc)
-					vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+					vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
 				end
 
 				-- Navigation
 				map("n", "]h", gs.next_hunk, "Next Hunk")
-				map("n", "[h", gs.prev_hunk, "Previous Hunk")
+				map("n", "[h", gs.prev_hunk, "Prev Hunk")
 
 				-- Hunk Actions
 				map({ "n", "v" }, "<leader>ghs", "<cmd>Gitsigns stage_hunk<CR>", "Stage Hunk")
@@ -49,6 +31,25 @@ return {
 				-- Text Object
 				map({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
 			end,
+		},
+	},
+	{
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		-- setting the keybinding for LazyGit with 'keys' is recommended in
+		-- order to load the plugin when the command is run for the first time
+		keys = {
+			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "Open lazy git" },
 		},
 	},
 }
