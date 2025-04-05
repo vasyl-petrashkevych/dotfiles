@@ -48,10 +48,6 @@ return {
 			keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
 			opts.desc = "Show LSP type definitions"
 			keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
-			opts.desc = "See available code actions"
-			keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-			opts.desc = "Smart rename"
-			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 			opts.desc = "Show buffer diagnostics"
 			keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
 			opts.desc = "Show line diagnostics"
@@ -64,8 +60,6 @@ return {
 			keymap.set("n", "]d", function()
 				vim.diagnostic.jump({ count = -1, float = true })
 			end, opts)
-			opts.desc = "Show hover documentation"
-			keymap.set("n", "K", vim.lsp.buf.hover, opts)
 			opts.desc = "Restart LSP"
 			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 		end
