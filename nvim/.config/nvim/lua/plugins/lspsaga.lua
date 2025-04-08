@@ -20,7 +20,7 @@ return {
 		keymap.set({ "n", "v" }, "<leader>ca", ":Lspsaga code_action<CR>", { desc = "Code action" })
 		keymap.set({ "n", "v" }, "<leader>cr", ":Lspsaga rename<CR>", { desc = "Rename" })
 		keymap.set({ "n", "v" }, "<leader>lo", ":Lspsaga outline<CR>", { desc = "File structure" })
-		keymap.set({ "n", "v" }, "K", ":Lspsaga hower_doc<CR>", { desc = "How info" })
+		keymap.set({ "n", "v" }, "K", ":Lspsaga hover_doc<CR>", { desc = "How info" })
 	end,
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter", -- optional

@@ -50,7 +50,6 @@ return {
 			keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
 			opts.desc = "Show buffer diagnostics"
 			keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
-			opts.desc = "Show line diagnostics"
 			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 			opts.desc = "Go to previous diagnostic"
 			keymap.set("n", "[d", function()
