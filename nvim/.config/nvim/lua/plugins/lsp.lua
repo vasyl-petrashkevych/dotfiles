@@ -80,6 +80,7 @@ return {
 					on_attach = on_attach,
 					settings = {
 						Lua = {
+							hint = { enabled = true },
 							diagnostics = { globals = { "vim" } },
 							completion = { callSnippet = "Replace" },
 						},
@@ -116,22 +117,40 @@ return {
 				lspconfig.ts_ls.setup({
 					capabilities = capabilities,
 					on_attach = on_attach,
+					settings = {
+						javascript = {
+							inlayHints = {
+								includeInlayEnumMemberValueHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayVariableTypeHints = false,
+							},
+						},
+
+						typescript = {
+							inlayHints = {
+								includeInlayEnumMemberValueHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayVariableTypeHints = false,
+							},
+						},
+					},
 				})
 			end,
-
 			["clangd"] = function()
 				lspconfig.clangd.setup({
 					capabilities = capabilities,
 					on_attach = on_attach,
 					cmd = {
 						"clangd",
-						"--offset-encoding=utf-16",
-						"--background-index",
-						"--clang-tidy",
-						"--header-insertion=iwyu",
-						"--completion-style=detailed",
-						"--function-arg-placeholders",
-						"--fallback-style=llvm",
+						"--inlay-hints=true",
 					},
 				})
 			end,
