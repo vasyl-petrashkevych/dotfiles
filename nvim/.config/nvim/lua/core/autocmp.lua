@@ -21,3 +21,14 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		vim.bo.filetype = "yaml.docker-compose"
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "*.json.*" },
+	callback = function()
+		vim.bo.filetype = "json"
+	end,
+})
+
+vim.cmd([[
+	au BufRead,BufNewFile Dockerfile* set filetype=dockerfile
+]])

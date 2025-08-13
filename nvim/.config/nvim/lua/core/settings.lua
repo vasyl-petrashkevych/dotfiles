@@ -57,12 +57,38 @@ opt.winblend = 0
 opt.wildoptions = "pum"
 opt.pumblend = 5
 opt.background = "dark"
-
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 -- highlight yanked text for 200ms using the "Visual" highlight group
 
 -- Change the Diagnostic symbols in the sign column (gutter)
-local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
+-- icons you like
+local icons = {
+	Error = "",
+	Warn = "",
+	Hint = "󰌶",
+	Info = "",
+}
+
+-- Modern diagnostic setup
+vim.diagnostic.config({
+	-- configure signs without sign_define()
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = icons.Error,
+			[vim.diagnostic.severity.WARN] = icons.Warn,
+			[vim.diagnostic.severity.HINT] = icons.Hint,
+			[vim.diagnostic.severity.INFO] = icons.Info,
+		},
+		numhl = {
+			[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+			[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+			[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+			[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+		},
+		-- linehl can be set similarly if you want line highlighting
+	},
+	virtual_text = { spacing = 1, prefix = "●" }, -- tweak as you like
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+})

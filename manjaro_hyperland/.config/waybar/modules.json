@@ -33,14 +33,6 @@
     },
     "separate-outputs": true
   },
-  // Rofi Application Launcher
-  "custom/appmenu": {
-    "format": "Apps",
-    "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings",
-    "on-click": "rofi -show drun -replace",
-    "on-click-right": "~/.config/ml4w/scripts/keybindings.sh",
-    "tooltip": false
-  },
   // Power Menu
   "custom/exit": {
     "format": "",
@@ -60,7 +52,7 @@
   },
   // System tray
   "tray": {
-    // "icon-size": 21,
+    "icon-size": 18,
     "spacing": 10
   },
   // Clock
@@ -235,5 +227,34 @@
     "exec": "playerctl metadata --format='{{ title }}'",
     "on-click": "playerctl play-pause",
     "max-length": 50
+  },
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "format": "{icon}",
+    "all-outputs": true,
+    "format-icons": {
+      "default": ""
+    }
+  },
+  "backlight": {
+    "device": "nvidia_0",
+    "format": "{icon}",
+    "on-scroll-up": "brightnessctl s '+10%'",
+    "on-scroll-down": "brightnessctl s '10%-'",
+    "on-click": "((( $(brightnessctl g) == 100 )) && brightnessctl s '0') || (brightnessctl s '+10%')",
+    "format-icons": ["", "", "", "", "", "", "", "", ""]
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}",
+    "format-charging": "󰂄",
+    "format-plugged": "",
+    "format-alt": "{icon}",
+    "format-icons": ["", "", "", "", ""]
   }
 }

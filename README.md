@@ -37,3 +37,11 @@ composer global require php-stubs/wordpress-globals php-stubs/wordpress-stubs ph
 copr enable atim/lazygit -y
 sudo dnf install zsh flameshot nvim blueman-manager pavucontrol lazygit network-manager-applet nm-connection-editor nm-connection-editor-desktop nmtui
 ````
+
+## Clear nvim cache
+
+```bash
+rm -rf ~/.cache/nvim
+rm -rf ~/.local/share/nvim
+rm -rf ~/.local/state/nvim
+```

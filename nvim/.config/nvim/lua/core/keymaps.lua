@@ -31,6 +31,7 @@ keymap.set("n", "<leader>LL", ":Lazy<cr>")
 
 -- Files --
 keymap.set("n", "QQ", ":q!<enter>")
+
 -- Window --
 keymap.set("n", "<leader>ww", "<C-w>w", { desc = "Go to next window" })
 keymap.set("n", "<leader>w<left>", "<C-w><", { desc = "Resize window to left" })

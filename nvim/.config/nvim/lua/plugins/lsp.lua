@@ -65,132 +65,136 @@ return {
 
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		mason_lspconfig.setup_handlers({
-			function(server_name)
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-				})
-			end,
+		mason_lspconfig.setup({
+			handlers = {
+				function(server_name)
+					if server_name then
+						lspconfig[server_name].setup({
+							capabilities = capabilities,
+							on_attach = on_attach,
+						})
+					end
+				end,
 
-			-- Special configs
-			["lua_ls"] = function()
-				lspconfig.lua_ls.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-					settings = {
-						Lua = {
-							hint = { enabled = true },
-							diagnostics = { globals = { "vim" } },
-							completion = { callSnippet = "Replace" },
-						},
-					},
-				})
-			end,
-
-			["emmet_ls"] = function()
-				lspconfig.emmet_ls.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-					filetypes = {
-						"html",
-						"typescriptreact",
-						"javascriptreact",
-						"css",
-						"sass",
-						"scss",
-						"less",
-						"svelte",
-					},
-				})
-			end,
-
-			["graphql"] = function()
-				lspconfig.graphql.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-				})
-			end,
-
-			["ts_ls"] = function()
-				lspconfig.ts_ls.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-					settings = {
-						javascript = {
-							inlayHints = {
-								includeInlayEnumMemberValueHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayVariableTypeHints = false,
+				-- Special configs
+				["lua_ls"] = function()
+					lspconfig.lua_ls.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+						settings = {
+							Lua = {
+								hint = { enabled = true },
+								diagnostics = { globals = { "vim" } },
+								completion = { callSnippet = "Replace" },
 							},
 						},
+					})
+				end,
 
-						typescript = {
-							inlayHints = {
-								includeInlayEnumMemberValueHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayVariableTypeHints = false,
+				["emmet_ls"] = function()
+					lspconfig.emmet_ls.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+						filetypes = {
+							"html",
+							"typescriptreact",
+							"javascriptreact",
+							"css",
+							"sass",
+							"scss",
+							"less",
+							"svelte",
+						},
+					})
+				end,
+
+				["graphql"] = function()
+					lspconfig.graphql.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+						filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+					})
+				end,
+
+				["ts_ls"] = function()
+					lspconfig.ts_ls.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+						settings = {
+							javascript = {
+								inlayHints = {
+									includeInlayEnumMemberValueHints = true,
+									includeInlayFunctionLikeReturnTypeHints = true,
+									includeInlayFunctionParameterTypeHints = true,
+									includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+									includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+									includeInlayPropertyDeclarationTypeHints = true,
+									includeInlayVariableTypeHints = false,
+								},
+							},
+
+							typescript = {
+								inlayHints = {
+									includeInlayEnumMemberValueHints = true,
+									includeInlayFunctionLikeReturnTypeHints = true,
+									includeInlayFunctionParameterTypeHints = true,
+									includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+									includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+									includeInlayPropertyDeclarationTypeHints = true,
+									includeInlayVariableTypeHints = false,
+								},
 							},
 						},
-					},
-				})
-			end,
-			["clangd"] = function()
-				lspconfig.clangd.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-					cmd = {
-						"clangd",
-						"--inlay-hints=true",
-					},
-				})
-			end,
+					})
+				end,
+				["clangd"] = function()
+					lspconfig.clangd.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+						cmd = {
+							"clangd",
+							"--inlay-hints=true",
+						},
+					})
+				end,
 
-			["bashls"] = function()
-				lspconfig.bashls.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-				})
-			end,
+				["bashls"] = function()
+					lspconfig.bashls.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+					})
+				end,
 
-			["cmake"] = function()
-				lspconfig.cmake.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-				})
-			end,
+				["cmake"] = function()
+					lspconfig.cmake.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+					})
+				end,
 
-			["marksman"] = function() -- Markdown
-				lspconfig.marksman.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-				})
-			end,
+				["marksman"] = function() -- Markdown
+					lspconfig.marksman.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+					})
+				end,
 
-			["dockerls"] = function()
-				lspconfig.dockerls.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-					filetypes = { "Dockerfile" },
-				})
-			end,
+				["dockerls"] = function()
+					lspconfig.dockerls.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+						filetypes = { "dockerfile" },
+					})
+				end,
 
-			["docker_compose_language_service"] = function()
-				lspconfig.docker_compose_language_service.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-					filetypes = { "yaml.docker-compose" },
-				})
-			end,
+				["docker_compose_language_service"] = function()
+					lspconfig.docker_compose_language_service.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+						filetypes = { "yaml.docker-compose" },
+					})
+				end,
+			},
 		})
 
 		-- Optional: Filetype detection for docker-compose
