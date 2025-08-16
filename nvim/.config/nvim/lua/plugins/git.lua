@@ -3,34 +3,7 @@ return {
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
-			on_attach = function(bufnr)
-				local gs = package.loaded.gitsigns
-				local function map(mode, l, r, desc)
-					vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
-				end
-
-				-- Navigation
-				map("n", "]h", gs.next_hunk, "Next Hunk")
-				map("n", "[h", gs.prev_hunk, "Prev Hunk")
-
-				-- Hunk Actions
-				map({ "n", "v" }, "<leader>ghs", "<cmd>Gitsigns stage_hunk<CR>", "Stage Hunk")
-				map({ "n", "v" }, "<leader>ghr", "<cmd>Gitsigns reset_hunk<CR>", "Reset Hunk")
-				map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
-				map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
-				map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
-				map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline")
-				map("n", "<leader>gb", function()
-					gs.blame_line({ full = true })
-				end, "Blame Line")
-				map("n", "<leader>gd", gs.diffthis, "Diff This")
-				map("n", "<leader>gD", function()
-					gs.diffthis("~")
-				end, "Diff This ~")
-
-				-- Text Object
-				map({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
-			end,
+			on_attach = function(bufnr) end,
 		},
 	},
 	{
@@ -45,11 +18,6 @@ return {
 		-- optional for floating window border decoration
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-		},
-		-- setting the keybinding for LazyGit with 'keys' is recommended in
-		-- order to load the plugin when the command is run for the first time
-		keys = {
-			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "Open lazy git" },
 		},
 	},
 }
