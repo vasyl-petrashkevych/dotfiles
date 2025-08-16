@@ -2,7 +2,7 @@
 echo "Manjaro After install part"
 # sudo pacman-mirrors --fasttrack
 sudo pacman -Syyu && sudo systemctl enable fstrim.timer && sudo systemctl start fstrim.timer  
-sudo pacman -S pavucontrol ufw gufw neovim kitty hyprland hyprpaper dunst pipewire waybar ranger rofi xdg-desktop-portal-hyprland docker docker-compose flameshot stow bitwarden gtk-chtheme alacritty ttf-meslo-nerd php php-apache php-cgi php-fpm php-gd  php-embed php-intl php-redis php-snmp blueman composer
+sudo pacman -S ags-hyprpanel-git pavucontrol ufw gufw neovim kitty hyprland hyprpaper dunst pipewire waybar ranger rofi xdg-desktop-portal-hyprland docker docker-compose flameshot stow bitwarden gtk-chtheme alacritty ttf-meslo-nerd php php-apache php-cgi php-fpm php-gd  php-embed php-intl php-redis php-snmp blueman composer
 
 sudo pamac install lua-language-server fish lazygit docker docker-compose bat clang python-pip cmake-language-server
 

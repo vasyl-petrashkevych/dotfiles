@@ -1,0 +1,74 @@
+{
+  "menus.clock.time.military": true,
+  "bar.layouts": {
+    "0": {
+      "left": [
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "network",
+        "bluetooth",
+        "systray",
+        "clock",
+        "notifications",
+        "dashboard"
+      ]
+    },
+    "1": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "clock",
+        "notifications"
+      ]
+    },
+    "2": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "clock",
+        "notifications"
+      ]
+    }
+  },
+  "theme.bar.menus.enableShadow": true,
+  "menus.media.displayTimeTooltip": true,
+  "menus.clock.weather.location": "Ozerna, Ternopil's'ka Oblast'",
+  "terminal": "alacritty",
+  "menus.clock.weather.unit": "metric",
+  "theme.bar.menus.opacity": 100,
+  "menus.dashboard.shortcuts.left.shortcut1.command": "google-chrome-stable",
+  "menus.dashboard.shortcuts.left.shortcut1.tooltip": "Google Chrome",
+  "menus.dashboard.shortcuts.left.shortcut2.command": "spotify",
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
+  "wallpaper.pywal": false,
+  "wallpaper.enable": false,
+  "menus.clock.time.hideSeconds": false,
+  "menus.clock.weather.key": "eb0729fc993e46da89b142742251608",
+  "menus.transition": "crossfade",
+  "bar.workspaces.numbered_active_indicator": "color",
+  "bar.clock.format": "%a %b %d  %H:%M:%S",
+  "bar.notifications.show_total": false,
+  "theme.bar.opacity": 80
+}
