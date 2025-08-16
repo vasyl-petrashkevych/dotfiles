@@ -2,8 +2,13 @@
   "menus.clock.time.military": true,
   "bar.layouts": {
     "0": {
-      "left": ["workspaces", "windowtitle"],
-      "middle": ["media"],
+      "left": [
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
       "right": [
         "volume",
         "network",
@@ -12,6 +17,39 @@
         "clock",
         "notifications",
         "dashboard"
+      ]
+    },
+    "1": {
+      "left": [
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "network",
+        "bluetooth",
+        "systray",
+        "clock",
+        "notifications",
+        "dashboard"
+      ]
+    },
+    "2": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "clock",
+        "notifications"
       ]
     }
   },
@@ -24,7 +62,9 @@
   "menus.dashboard.shortcuts.left.shortcut1.command": "google-chrome-stable",
   "menus.dashboard.shortcuts.left.shortcut1.tooltip": "Google Chrome",
   "menus.dashboard.shortcuts.left.shortcut2.command": "spotify",
-  "bar.customModules.storage.paths": ["/"],
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
   "wallpaper.pywal": false,
   "wallpaper.enable": false,
   "menus.clock.time.hideSeconds": false,
@@ -35,4 +75,3 @@
   "bar.notifications.show_total": false,
   "theme.bar.opacity": 80
 }
-
