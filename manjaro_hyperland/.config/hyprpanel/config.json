@@ -73,5 +73,8 @@
   "bar.workspaces.numbered_active_indicator": "color",
   "bar.clock.format": "%a %b %d  %H:%M:%S",
   "bar.notifications.show_total": false,
-  "theme.bar.opacity": 80
+  "theme.bar.opacity": 80,
+  "notifications.ignore": [
+    "spotify"
+  ]
 }
