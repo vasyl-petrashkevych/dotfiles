@@ -1,10 +1,21 @@
 return {
-{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		config = function()
-			vim.cmd([[colorscheme catppuccin]])
-		end,
-	}
+  {
+    "morhetz/gruvbox",
+    priority = 1000,
+    config = function()
+      vim.o.background = "dark"
+      vim.cmd("colorscheme gruvbox")
+    end,
+  },
 }
+
+-- return {
+-- {
+-- 		"catppuccin/nvim",
+-- 		name = "catppuccin",
+-- 		priority = 1000,
+-- 		config = function()
+-- 			vim.cmd([[colorscheme catppuccin]])
+-- 		end,
+-- 	}
+-- }
