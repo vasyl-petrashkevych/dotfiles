@@ -2,13 +2,8 @@
   "menus.clock.time.military": true,
   "bar.layouts": {
     "0": {
-      "left": [
-        "workspaces",
-        "windowtitle"
-      ],
-      "middle": [
-        "media"
-      ],
+      "left": ["workspaces", "windowtitle"],
+      "middle": ["media"],
       "right": [
         "volume",
         "network",
@@ -21,13 +16,8 @@
       ]
     },
     "1": {
-      "left": [
-        "workspaces",
-        "windowtitle"
-      ],
-      "middle": [
-        "media"
-      ],
+      "left": ["workspaces", "windowtitle"],
+      "middle": ["media"],
       "right": [
         "volume",
         "network",
@@ -40,19 +30,9 @@
       ]
     },
     "2": {
-      "left": [
-        "dashboard",
-        "workspaces",
-        "windowtitle"
-      ],
-      "middle": [
-        "media"
-      ],
-      "right": [
-        "volume",
-        "clock",
-        "notifications"
-      ]
+      "left": ["dashboard", "workspaces", "windowtitle"],
+      "middle": ["media"],
+      "right": ["volume", "clock", "notifications"]
     }
   },
   "theme.bar.menus.enableShadow": true,
@@ -64,9 +44,7 @@
   "menus.dashboard.shortcuts.left.shortcut1.command": "google-chrome-stable",
   "menus.dashboard.shortcuts.left.shortcut1.tooltip": "Google Chrome",
   "menus.dashboard.shortcuts.left.shortcut2.command": "spotify",
-  "bar.customModules.storage.paths": [
-    "/"
-  ],
+  "bar.customModules.storage.paths": ["/"],
   "wallpaper.pywal": false,
   "wallpaper.enable": false,
   "menus.clock.time.hideSeconds": false,
@@ -76,7 +54,6 @@
   "bar.clock.format": "%a %b %d  %H:%M:%S",
   "bar.notifications.show_total": false,
   "theme.bar.opacity": 80,
-  "notifications.ignore": [
-    "spotify"
-  ]
+  "notifications.ignore": ["spotify"]
 }
+
