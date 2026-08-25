@@ -24,10 +24,10 @@ fi
 echo "Reload .zshrc"
 source ~/.zshrc
 
-echo "Install nopde js"
+echo "Install node js"
 nvm install --lts
 
-echo "Dokcer post installation steps"
+echo "Docker post installation steps"
 sudo usermod -aG docker $USER 
 sudo systemctl enable docker.service 
 sudo systemctl enable containerd.service
@@ -37,10 +37,10 @@ chmod 644 ~/.ssh/*
 chmod 600 ~/.ssh/work
 chmod 600 ~/.ssh/id_rsa
 
-echo "Create Wrok and Project folders"
+echo "Create Work and Project folders"
 cd && mkdir Work && mkdir Projects
 
-npm install -g eslint_d yarn vscode-langservers-extracted typescript typescript-language-server intelephense diagnostic-languageserver stylelint-lsp
+npm install -g eslint_d yarn vscode-langservers-extracted typescript typescript-language-server intelephense diagnostic-languageserver stylelint-lsp tree-sitter-cli
 
 composer global require php-stubs/wordpress-globals php-stubs/wordpress-stubs php-stubs/woocommerce-stubs php-stubs/acf-pro-stubs wpsyntex/polylang-stubs php-stubs/genesis-stubs php-stubs/wp-cli-stubs
 
