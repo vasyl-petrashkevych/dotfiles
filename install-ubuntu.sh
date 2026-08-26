@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Ubuntu After install part"
 sudo apt-get update && sudo apt-get upgrade -y
-sudo apt install ubuntu-restricted-extras tlp tlp-rdw gnome-tweaks curl zsh gcc cmake valgrind python3 python3-pip luarocks tree-sitter-cli isort black fd-find ripgrep php composer ffmpeg libavcodec-dev libavfilter-dev libavutil-dev libavformat-dev libavcodec-dev libavfilter-dev libavutil-dev libavformat-dev libglib2.0-dev libcurl4-openssl-dev valgrind chrome-gnome-shell stow -y
+sudo apt install ubuntu-restricted-extras tlp tlp-rdw gnome-tweaks curl zsh gcc cmake valgrind python3 python3-pip luarocks tree-sitter-cli isort black fd-find ripgrep php composer ffmpeg libavcodec-dev libavfilter-dev libavutil-dev libavformat-dev libavcodec-dev libavfilter-dev libavutil-dev libavformat-dev libglib2.0-dev libcurl4-openssl-dev valgrind chrome-gnome-shell stow  wl-clipboard -y
 
 echo "Install Docker"
 sudo apt update
@@ -44,13 +44,6 @@ echo "Install node js"
 source ~/.bashrc
 nvm install --lts
 
-
-echo "ZSH installation steps"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
 echo "Create Work and Project folders"
 cd && mkdir Work && mkdir Projects
 
@@ -58,3 +51,9 @@ npm install -g eslint_d yarn vscode-langservers-extracted typescript typescript-
 composer global require php-stubs/wordpress-globals php-stubs/wordpress-stubs php-stubs/woocommerce-stubs php-stubs/acf-pro-stubs wpsyntex/polylang-stubs php-stubs/genesis-stubs php-stubs/wp-cli-stubs
 
 stow nvim fonts zshrc ideavimrc
+
+echo "ZSH installation steps"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting

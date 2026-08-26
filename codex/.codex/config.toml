@@ -10,3 +10,6 @@ url = "https://mcp.atlassian.com/v1/mcp"
 
 [notice.model_migrations]
 "gpt-5.4" = "gpt-5.5"
+
+[projects."/home/wisehunter/Work/se-video-axis-camera"]
+trust_level = "trusted"
