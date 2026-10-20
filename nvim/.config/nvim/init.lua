@@ -1,6 +1,12 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.filetype.add({ extension = { ejs = "html", inc = "php" } })
+
+-- Compatibility for plugins that still call the deprecated vim.F.if_nil.
+if vim.nonnil then
+	vim.F.if_nil = vim.nonnil
+end
+
 require("core.settings")
 require("core.keymaps")
 require("core.autocmp")
