@@ -5,6 +5,30 @@ return {
 		local conform = require("conform")
 
 		conform.setup({
+			formatters = {
+				phpcbf = {
+					cwd = require("conform.util").root_file({
+						"phpcs.xml",
+						"phpcs.xml.dist",
+						".phpcs.xml",
+						".phpcs.xml.dist",
+					}),
+				},
+				php_cs_fixer = {
+					args = function(_, ctx)
+						local configs = { ".php-cs-fixer.php", ".php-cs-fixer.dist.php" }
+						if vim.fs.root(ctx.dirname, configs) then
+							return { "fix", "$FILENAME" }
+						end
+
+						return { "fix", "--using-cache=no", "--rules=@PER-CS3.0", "$FILENAME" }
+					end,
+					cwd = function(_, ctx)
+						local configs = { ".php-cs-fixer.php", ".php-cs-fixer.dist.php" }
+						return vim.fs.root(ctx.dirname, configs) or ctx.dirname
+					end,
+				},
+			},
 			formatters_by_ft = {
 				javascript = { "prettier" },
 				typescript = { "prettier" },
@@ -12,6 +36,7 @@ return {
 				typescriptreact = { "prettier" },
 				svelte = { "prettier" },
 				css = { "prettier" },
+				scss = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
 				yaml = { "prettier" },
@@ -20,9 +45,10 @@ return {
 				liquid = { "prettier" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
+				php = { "phpcbf", "php_cs_fixer", stop_after_first = true },
 			},
 			format_on_save = {
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = false,
 				timeout_ms = 1000,
 			},
@@ -30,7 +56,7 @@ return {
 
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
 			conform.format({
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = false,
 				timeout_ms = 1000,
 			})

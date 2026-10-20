@@ -9,6 +9,9 @@ local servers = {
 	"docker_compose_language_service",
 	"emmet_ls",
 	"graphql",
+	"html",
+	"cssls",
+	"intelephense",
 }
 
-require("mason-lspconfig").setup({ ensure_installed = servers })
+return servers

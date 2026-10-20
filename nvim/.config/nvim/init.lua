@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.filetype.add({ extension = { ejs = "html" } })
+vim.filetype.add({ extension = { ejs = "html", inc = "php" } })
 require("core.settings")
 require("core.keymaps")
 require("core.autocmp")

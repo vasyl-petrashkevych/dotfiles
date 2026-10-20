@@ -1,4 +1,3 @@
-vim.cmd("autocmd!")
 local opt = vim.opt
 
 -- Encoding
@@ -7,29 +6,23 @@ opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- optionally enable 24-bit colour
-opt.termguicolors = true
-
 -- Spelling
 opt.spelllang = "en_us"
 opt.spell = true
 
 vim.g.loaded_netrw = 1 -- disable netrw
 vim.g.loaded_netrwPlugin = 1 --  disable netrw
---
+
 opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 opt.mouse = "a" -- allow the mouse to be used in neovim
 opt.incsearch = true -- make search act like search in modern browsers
 opt.number = true -- Show Line numbers
-opt.termguicolors = true -- set term gui colors (most terminals support this)
+opt.termguicolors = true -- set terminal GUI colors
 opt.timeoutlen = 1000 -- time to wait for a mapped sequence to complete (in milliseconds)
 opt.undofile = true -- enable persistent undo
 opt.updatetime = 100 -- faster completion (4000ms default)
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-opt.expandtab = false -- convert tabs to spaces-
+opt.expandtab = false -- keep literal tab characters
 opt.relativenumber = true
 opt.backupskip = { "/tmp/*", "/private/tmp/*" }
 opt.smartindent = true -- make indenting smarter again
@@ -52,7 +45,6 @@ opt.formatoptions:append({ "r" })
 
 -- Highlights
 opt.cursorline = true
-opt.termguicolors = true
 opt.winblend = 0
 opt.wildoptions = "pum"
 opt.pumblend = 5
@@ -91,4 +83,5 @@ vim.diagnostic.config({
 	underline = true,
 	update_in_insert = false,
 	severity_sort = true,
+	float = { source = true, border = "rounded" },
 })

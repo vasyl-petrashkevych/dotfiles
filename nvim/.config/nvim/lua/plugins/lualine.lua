@@ -12,7 +12,7 @@ return {
 			},
 			disabled_filetypes = {
 				statusline = {
-					"alfa-nvim",
+					"alpha",
 					"help",
 					"neo-tree",
 					"Trouble",

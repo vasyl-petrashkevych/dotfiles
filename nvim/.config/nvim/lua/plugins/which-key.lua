@@ -83,7 +83,7 @@ return {
 			},
 			-- Code
 			{
-				{ "c", group = "Code", mode = { "n", "v" } },
+				{ "<leader>c", group = "Code", mode = { "n", "v" } },
 				{ "<leader>ca", ":Lspsaga code_action<CR>", desc = "Code action" },
 				{ "<leader>cr", ":Lspsaga rename<CR>", desc = "Rename" },
 				{ "<leader>lo", ":Lspsaga outline<CR>", desc = "File structure" },
@@ -95,7 +95,7 @@ return {
 			-- LSP management
 			{ "<leader>rs", ":LspRestart<cr>", desc = "Restart LSP", mode = "n" },
 			{
-				{ "g", group = "Git", mode = "n" },
+				{ "<leader>g", group = "Git", mode = "n" },
 				{ "<leader>gg", ":LazyGit<cr>", desc = "Git status" },
 				{ "]h", ":Gitsigns next_hunk<cr>", desc = "Next Hunk", mode = "n" },
 				{ "[h", ":Gitsigns prev_hunk<cr>", desc = "Prev Hunk", mode = "n" },
@@ -120,7 +120,7 @@ return {
 				},
 				{
 					"<leader>gu",
-					":Gitsigns undo_sage_hunk<cr>",
+					":Gitsigns undo_stage_hunk<cr>",
 					desc = "Undo Stage Hunk",
 					mode = "n",
 				},
@@ -138,13 +138,13 @@ return {
 				},
 				{
 					"<leader>gb",
-					":Gitsigns blame_line",
+					":Gitsigns blame_line<cr>",
 					desc = "Blame Line (full)",
 					mode = "n",
 				},
 				{
 					"<leader>gd",
-					":Gitsigns diffthis",
+					":Gitsigns diffthis<cr>",
 					desc = "Diff This",
 					mode = "n",
 				},
