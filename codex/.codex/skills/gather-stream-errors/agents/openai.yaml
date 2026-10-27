@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gather Stream Errors"
+  short_description: "Gather stream, camera, and CloudWatch log diagnostics"
+  default_prompt: "Use $gather-stream-errors to fetch stream and camera details and CloudWatch info/error logs for this stream ID."

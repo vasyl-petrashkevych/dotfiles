@@ -1,0 +1,15 @@
+query FetchCameras($ids: [ID!]!) {
+  fetchCameras(ids: $ids) {
+    id
+    name
+    cameraId
+    axisConnectionType
+    periscope {
+      appVersion
+    }
+    application
+    camFirmwareVersion
+    camArchitecture
+    scoreboardCameraId
+  }
+}

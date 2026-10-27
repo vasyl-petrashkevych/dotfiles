@@ -1,0 +1,12 @@
+query LiveStreamsPrivate($liveStreamsPrivateId: ID) {
+  liveStreamsPrivate(isDeleted: false, id: $liveStreamsPrivateId) {
+    count
+    data {
+      eventName
+      camera {
+        id
+      }
+      visionularStreamId
+    }
+  }
+}
